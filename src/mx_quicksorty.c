@@ -1,33 +1,13 @@
 #include "uls.h"
 
-static void swap_str(char **s1, char **s2);
-
-static void swap_str(char **s1, char **s2) {
-   char *temp;
-   temp = *s1;
-   *s1 = *s2;
-   *s2 = temp;
-}
-
-char **mx_quicksorty(char **arr, int left, int right)
-{
-    if(left < right)
-    {
-        int low = left, high = right;
-        char *middle = arr[(low + high) / 2];
-        while(low <= high)
-        {
-            while(mx_strcmp(arr[low], middle) < 0) low++;
-            while(mx_strcmp(arr[high], middle) > 0) high--;
-            if(low <= high)
-            {
-                swap_str(&arr[low],&arr[high]);
-                low++;
-                high--;
-            }
-        }
-        mx_quicksorty(arr, left, high);
-        mx_quicksorty(arr, low, right);
+void mx_quicksorty(char **D, char **F, char **E, all_t all) {
+    if(all.n_dirs) {
+        mx_quicksort(D, 0, all.n_dirs - 1);
     }
-    return arr;
+    if(all.n_files) {
+        mx_quicksort(F, 0, all.n_files - 1);
+    }
+    if(all.n_errors) {
+        mx_quicksort(E, 0, all.n_errors - 1);
+    }
 }

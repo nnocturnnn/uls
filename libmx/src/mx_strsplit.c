@@ -1,27 +1,30 @@
 #include "libmx.h"
 
- static int mx_strlendelim(const char *c, const char delim) {
-    int i = 0;
-    
-    while (*c && *c++ != delim)
-        i++;
-    return i;
-}
-
 char **mx_strsplit(const char *s, char c) {
- 	int i = 0;
- 	int len = mx_count_words(s, c);
- 	if(s == NULL) return NULL;
- 	char **str = (char **) malloc(len * sizeof(char *));
- 	while(*s) {
- 		if(*s == c) {
- 			s++;
- 		}
- 		else {
- 			str[i] = mx_strnew(mx_strlendelim(s, c));
- 			mx_strncpy(str[i], s, mx_strlendelim(s, c));
- 		}
- 		i++;
- 	}
- 	return str;
+    if (!s) {
+        return NULL;
+    }
+    int size_arr = mx_count_words(s, c);
+    int counter = 0;
+    char **result = malloc(sizeof(char *) * (size_arr + 1));
+    int len = mx_strlen(s);
+    int index = 0;
+    if (size_arr == 1) {
+        result[0] = mx_strdup(s);
+        result[1] = NULL;
+        return result;
+    }
+    for (int i = 0; i < len; i++) {
+        index = mx_get_char_index(s, c);
+        index = index == -1 ? mx_strlen(s) : index;
+        if (index) {
+            result[counter] = mx_strndup(s, index);
+            s += mx_strlen(result[counter]) - 1;
+            i += mx_strlen(result[counter]) - 1;
+            counter++;
+        }
+        s++;
+    } 
+    result[size_arr] = NULL;
+    return result;
 }

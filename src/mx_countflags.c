@@ -2,31 +2,27 @@
 
 static void no_allowed(char *flags, int i, int j, char *argv[]);
 
-int mx_count_flags(int argc, char *argv[], char *flags, int *current_flags) {
+int mx_count_flags(int argc, char *argv[], char *flags, int *cur_flag) {
     int n_flags = 0;
     for(int i = 1; i < argc; i++) {
         if(argv[i][0] != '-' || !argv[i][1]) {
             break;
-        }
-        if(argv[i][1] == '-' && !argv[i][2]) {
+        } if(argv[i][1] == '-' && !argv[i][2]) {
             n_flags++;
             break;
-        }
-        n_flags++;
+        } n_flags++;
         for(int j = 1; j < mx_strlen(argv[i]); j++) {
             bool allowed = 0;
             for (int k = 0; k < mx_strlen(flags); k++) {
                 if(argv[i][j] == flags[k] ) {
                     allowed++;
-                    current_flags[k] = 1;
+                    cur_flag[k] = 1;
                 }
-            }
-            if(!allowed) {
+            } if(!allowed) {
                 no_allowed(flags, i, j, argv);
-            } 
+            }
         }
-    }
-    return n_flags;
+    } return n_flags;
 }
 
 static void no_allowed(char *flags, int i, int j, char *argv[]) {

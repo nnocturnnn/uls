@@ -5,6 +5,20 @@ INC = ./inc/uls.h
 HEADTMP = ./uls.h
 
 SRC = ./main.c \
+		./mx_get_char_index_pr.c \
+		./mx_priority.c \
+		./mx_slong_out.c \
+		./mx_flong_out.c \
+		./mx_back_sorty.c \
+		./mx_print_inode.c \
+		./mx_print_permissions.c \
+		./mx_get_controls.c \
+		./mx_print_user.c \
+		./mx_print_controls.c \
+		./mx_1_output.c \
+		./mx_def_space.c \
+		./mx_get_short_size.c \
+		./mx_print_mx_acl.c \
 		./mx_acl.c \
 		./mx_atosize.c \
 		./mx_cat_output.c \
@@ -47,6 +61,20 @@ SRC = ./main.c \
 		./mx_xattr.c \
 
 SRCS = ./src/main.c \
+		./src/mx_get_char_index_pr.c \
+		./src/mx_priority.c \
+		./src/mx_slong_out.c \
+		./src/mx_flong_out.c \
+		./src/mx_back_sorty.c \
+		./src/mx_print_inode.c \
+		./src/mx_print_permissions.c \
+		./src/mx_get_controls.c \
+		./src/mx_print_user.c \
+		./src/mx_print_controls.c \
+		./src/mx_1_output.c \
+		./src/mx_def_space.c \
+		./src/mx_get_short_size.c \
+		./src/mx_print_mx_acl.c \
 		./src/mx_acl.c \
 		./src/mx_atosize.c \
 		./src/mx_cat_output.c \
@@ -89,6 +117,20 @@ SRCS = ./src/main.c \
 		./src/mx_xattr.c \
 
 OBJ = ./main.o \
+		./mx_get_char_index_pr.o \
+		./mx_priority.o \
+		./mx_slong_out.o \
+		./mx_flong_out.o \
+		./mx_back_sorty.o \
+		./mx_print_inode.o \
+		./mx_print_permissions.o \
+		./mx_get_controls.o\
+		./mx_print_user.o \
+		./mx_print_controls.o \
+		./mx_1_output.o \
+		./mx_def_space.o \
+		./mx_get_short_size.o \
+		./mx_print_mx_acl.o \
 		./mx_acl.o \
 		./mx_atosize.o \
 		./mx_cat_output.o \
@@ -131,6 +173,20 @@ OBJ = ./main.o \
 		./mx_xattr.o \
 
 OBJO = ./obj/main.o \
+		./obj/mx_get_char_index_pr.o \
+		./obj/mx_priority.o \
+		./obj/mx_slong_out.o \
+		./obj/mx_flong_out.o \
+		./obj/mx_back_sorty.o \
+		./obj/mx_print_inode.o \
+		./obj/mx_print_permissions.o \
+		./obj/mx_get_controls.o\
+		./obj/mx_print_user.o \
+		./obj/mx_print_controls.o \
+		./obj/mx_1_output.o \
+		./obj/mx_def_space.o \
+		./obj/mx_get_short_size.o \
+		./obj/mx_print_mx_acl.o \
 		./obj/mx_acl.o \
 		./obj/mx_atosize.o \
 		./obj/mx_cat_output.o \

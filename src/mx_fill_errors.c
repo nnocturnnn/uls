@@ -12,5 +12,3 @@ int mx_fill_errors(int argc, char *argv[], int n_flags, char **E) {
     }
     return n_errors;
 }
-
-

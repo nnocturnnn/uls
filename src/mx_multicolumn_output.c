@@ -1,41 +1,34 @@
 #include "uls.h"
 
-static int count_lines(int n_files, int max, int *current_flags);
+static int count_lines(int n_files, int max, int *cur_flag);
 static char *get_path(char *File, char *Directory);
-static int get_max_len(int *current_flags, char **F, t_file **all, int n_files);
-static void print_inode(t_file *all, int *current_flags);
+static int get_max_len(int *cur_flag, char **F, t_file **all, int n_files);
+static void print_inode(t_file *all, int *cur_flag);
 
-void mx_multicolumn_output(char **F, int n_files, int *current_flags, char *Directory) {
+void mx_multicolumn_output(char **F, int n_files, int *cur_flag, char *Directory) {
     t_file **all = (t_file **)malloc(sizeof(t_file) * 200);
-    all = mx_get_fileinfo(all, F, Directory, current_flags);
-    int max = get_max_len(current_flags, F, all, n_files);
-    int count = count_lines(n_files, max, current_flags);
+    all = mx_get_fileinfo(all, F, Directory, cur_flag);
+    int max = get_max_len(cur_flag, F, all, n_files);
+    int count = count_lines(n_files, max, cur_flag);
+    char *path;
+
     for(int i = 0; i < count; i++) {
         for(int j = 0; j < n_files; j++) {
             if (j == i || (j - i) % count == 0) {
-                char *path = get_path(F[j], Directory);
-                print_inode(all[i], current_flags); // inode
-                mx_printname_f(path, current_flags);
-                if(!current_flags[12]){ // standart(without inode)
-                    mx_space(max - mx_strlen(F[j]));
-                    if(current_flags[2]) {// -G
-                        mx_space(1);
-                    } else { // standart output
-                        mx_printstr("\t");
-                    }
-                } else { // -i
-                    mx_space(max - (mx_strlen(F[j]) + mx_strlen(all[j]->inode)));
-                }
+                path = get_path(F[j], Directory);
+                print_inode(all[j], cur_flag); // inode
+                mx_printname_f(path, cur_flag);
+                mx_def_space(cur_flag, j, max, all, F);
             }
         }
-        if(count){
+        if(count) {
             mx_printstr("\n");
         }
     }
     free(all);
 }
 
-static int count_lines(int n_files, int max, int *current_flags) {
+static int count_lines(int n_files, int max, int *cur_flag) {
 	struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);//узнаем размер терминала
 	int w1 = w.ws_col; 
@@ -45,7 +38,7 @@ static int count_lines(int n_files, int max, int *current_flags) {
         tmp -= 8;
     }
     int space = 9 - tmp;
-    if(current_flags[2]) {// -G
+    if(cur_flag[2]) {// -G
         space = 1;
     }
     if(n_files  * (max + space) >= w1) {
@@ -68,9 +61,9 @@ static char *get_path(char *File, char *Directory) {
     return path;
 }
 
-static int get_max_len(int *current_flags, char **F, t_file **all, int n_files) {
+static int get_max_len(int *cur_flag, char **F, t_file **all, int n_files) {
     int max = 0;
-    if(!current_flags[12]) {
+    if(!cur_flag[12]) {
         for(int i= 0; i < n_files; i++) {
             if(mx_strlen(F[i]) > max) {
                 max = mx_strlen(F[i]);
@@ -86,10 +79,9 @@ static int get_max_len(int *current_flags, char **F, t_file **all, int n_files) 
     return max;
 }
 
-static void print_inode(t_file *all, int *current_flags) {
-    if(current_flags[12]) { // -i
+static void print_inode(t_file *all, int *cur_flag) {
+    if(cur_flag[12]) { // -i
         mx_printstr(all->inode);
         mx_printstr(" ");
     }
 }
-

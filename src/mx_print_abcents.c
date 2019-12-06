@@ -1,8 +1,8 @@
 #include "uls.h"
 
-void mx_print_abcents(int n_errors, char **E) {
+void mx_print_abcents(all_t all, char **E) {
     int i = 0;
-   	if(n_errors) {
+   	if(all.n_errors) {
    		while(E[i] != NULL) {
         DIR *dptr  = opendir(E[i]);
         if(dptr == NULL){

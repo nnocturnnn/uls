@@ -1,29 +1,29 @@
 #include "uls.h"
 
 static char *get_path(char *File, char *Directory);
-static struct stat get_stat(char *path, int *current_flags);
+static struct stat get_stat(char *path, int *cur_flag);
 static char *get_permissions(struct stat buff);
 static char get_acl_attr(char *path);
 static char *get_long_time(time_t time);
 static char *get_short_time(time_t current_time, time_t time);
-static time_t get_time(struct stat buff, int *current_flags);
+static time_t get_time(struct stat buff, int *cur_flag);
 
-t_file **mx_get_fileinfo(t_file **all, char **F, char *Directory, int *current_flags) {
+t_file **mx_get_fileinfo(t_file **all, char **F,char *Directory, int *cur_flag) {
 	time_t current_time = time(0);
     int i = 0; 
     while(F[i] != NULL) {
         all[i] = malloc(sizeof(t_file));// creation
         char *path = get_path(F[i], Directory);//path
-        struct stat buff = get_stat(path, current_flags);// stat
-        time_t time = get_time(buff, current_flags);// full time
-
+        struct stat buff = get_stat(path, cur_flag);// stat
+        time_t time = get_time(buff, cur_flag);// full time
+        
         all[i]->path = path;// get path
         all[i]->filename = F[i];// get name
         all[i]->permissions = get_permissions(buff);// get permisssion
         all[i]->acl_attr = get_acl_attr(path);// get acl attribute
         all[i]->links = mx_itoa(buff.st_nlink);// get links
-        all[i]->owner = mx_get_owner(buff, current_flags);// get owner
-        all[i]->group = mx_get_group(buff, current_flags);// get group
+        all[i]->owner = mx_get_owner(buff, cur_flag);// get owner
+        all[i]->group = mx_get_group(buff, cur_flag);// get group
         all[i]->size = mx_sizetoa(buff.st_size);// get size in standart format
         all[i]->size_h = mx_get_sizeh(all[i]->size);// get size in human readable format
         all[i]->full_time = get_long_time(time);// get time in long format
@@ -43,9 +43,9 @@ static char *get_path(char *File, char *Directory) {
     return path;
 }
 
-static struct stat get_stat(char *path, int *current_flags) {
+static struct stat get_stat(char *path, int *cur_flag) {
     struct stat buff;
-    if(current_flags[9]) {//-L
+    if(cur_flag[9]) {//-L
         stat(path, &buff);//without links
     } else {// standart
         lstat(path, &buff);//with links
@@ -63,9 +63,9 @@ static char get_acl_attr(char *path) {
     return acl;
 }
 
-static time_t get_time(struct stat buff, int *current_flags) {
+static time_t get_time(struct stat buff, int *cur_flag) {
     time_t time;
-    if(current_flags[11]) {// -u
+    if(cur_flag[11]) {// -u
         time = buff.st_atime;
     } else {
         time = buff.st_mtime;

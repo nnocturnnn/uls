@@ -2,8 +2,8 @@
 
 static char *get_path(char *File, char *Directory);
 
-void mx_R(int *current_flags, char **F, all_t all, char *Directory, int dir_count) {
-    if(current_flags[1] == 1) {//-R
+void mx_R(int *cur_flag, char **F, all_t all, char *Directory, int dir_count) {
+    if(cur_flag[1] == 1) {//-R
         for (int i = 0; i < dir_count; i++) {
         	char *path = get_path(F[i], Directory);
         	struct stat buff;
@@ -17,7 +17,7 @@ void mx_R(int *current_flags, char **F, all_t all, char *Directory, int dir_coun
                 mx_printstr("\n");
                 rec_D[0] = path;
                 rec_D[1] = NULL; 
-                mx_print_dirs(all, rec_D, current_flags);
+                mx_print_dirs(all, rec_D, cur_flag);
                 free(rec_D);
             }
         }

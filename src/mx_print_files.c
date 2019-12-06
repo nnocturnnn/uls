@@ -1,17 +1,17 @@
 #include "uls.h"
 
-void mx_print_files(int n_files, int n_dirs, char **F,  int *current_flags) {
-    if(n_files) {
-        if(!current_flags[0] && !current_flags[10]) {//without -l / -o
+void mx_print_files(all_t all, char **F,  int *cur_flag) {
+    if(all.n_files) {
+        if(!cur_flag[0] && !cur_flag[10] && !cur_flag[14]) {//without -l / -o
             if(!isatty(1)) {// |cat -e
-                mx_cat_output(F, current_flags, ".");
+                mx_cat_output(F, cur_flag, ".");
             } else {// multicolumn output
-                mx_multicolumn_output(F, n_files, current_flags, ".");
+                mx_multicolumn_output(F, all.n_files, cur_flag, ".");
             }
         } else {//-l
-            mx_long_output(F, current_flags, ".");
+            mx_long_output(F, cur_flag, ".");
         }
-        if(n_dirs) {
+        if(all.n_dirs) {
             mx_printstr("\n");
         }
     }

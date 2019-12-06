@@ -20,4 +20,3 @@ int mx_fill_dirs(int argc, char *argv[], int n_flags, char **D) {
     }
     return n_dirs;
 }
-
