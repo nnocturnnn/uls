@@ -5,7 +5,7 @@ static int r_n_flag(int argc, char **argv, int n_flags);
 static int *r_cur_flag(int argc, char **argv, all_t all);
 static t_arr *initarr(int argc);
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) { 
     t_arr *arr = initarr(argc);
     all_t *all = init(argc, argv, *arr);
     int *cur_flag = r_cur_flag(argc, argv, *all);
