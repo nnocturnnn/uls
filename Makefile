@@ -5,6 +5,8 @@ INC = ./inc/uls.h
 HEADTMP = ./uls.h
 
 SRC = ./main.c \
+		./sorty.c \
+		./mx_m_output.c \
 		./mx_get_char_index_pr.c \
 		./mx_priority.c \
 		./mx_slong_out.c \
@@ -59,8 +61,12 @@ SRC = ./main.c \
 		./mx_sort_str.c \
 		./mx_space.c \
 		./mx_xattr.c \
+		./mx_checksort.c \
+		./mx_get_size.c \
 
 SRCS = ./src/main.c \
+		./src/sorty.c \
+		./src/mx_m_output.c \
 		./src/mx_get_char_index_pr.c \
 		./src/mx_priority.c \
 		./src/mx_slong_out.c \
@@ -115,8 +121,12 @@ SRCS = ./src/main.c \
 		./src/mx_sort_str.c \
 		./src/mx_space.c \
 		./src/mx_xattr.c \
+		./src/mx_checksort.c \
+		./src/mx_get_size.c \
 
 OBJ = ./main.o \
+		./sorty.o \
+		./mx_m_output.o \
 		./mx_get_char_index_pr.o \
 		./mx_priority.o \
 		./mx_slong_out.o \
@@ -171,8 +181,12 @@ OBJ = ./main.o \
 		./mx_sort_str.o \
 		./mx_space.o \
 		./mx_xattr.o \
+		./mx_checksort.o \
+		./mx_get_size.o \
 
 OBJO = ./obj/main.o \
+		./obj/sorty.o \
+		./obj/mx_m_output.o \
 		./obj/mx_get_char_index_pr.o \
 		./obj/mx_priority.o \
 		./obj/mx_slong_out.o \
@@ -227,26 +241,28 @@ OBJO = ./obj/main.o \
 		./obj/mx_sort_str.o \
 		./obj/mx_space.o \
 		./obj/mx_xattr.o \
+		./obj/mx_checksort.o \
+		./obj/mx_get_size.o \
 
-CFLGS = -std=c11 -Wall -Wextra -Wpedantic -Werror# -g -fsanitize=address
+CFLGS = -std=c11 -Wall -Wextra -Wpedantic -Werror
 
 all: install uninstall
 
 install:
-	@cd libmx && make -f Makefile install
+	@make -C libmx -f Makefile install
 	@cp $(INC) $(SRCS) .
 	@clang $(CFLGS) -c  $(SRC)
-	@mkdir  obj
+	@mkdir -p obj
 	@mv $(OBJ) ./obj
 	@clang $(CFLGS) $(OBJO) libmx/libmx.a -o $(NAME)
 
 uninstall:
-	@cd libmx && make -f Makefile uninstall
+	@make -C libmx -f Makefile uninstall
 	@rm -rf $(OBJO) $(SRC) $(HEADTMP)
 	@rm -rf ./obj
 
 clean: uninstall
-	@cd libmx && make -f Makefile clean
+	@make -C libmx -f Makefile clean
 	@rm -rf $(NAME)
 
 reinstall: clean all

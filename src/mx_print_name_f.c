@@ -4,22 +4,14 @@ static void color_dir(char *mode);
 static void color_x(char *mode);
 static void check_col_att(char *mode);
 
-void mx_printname_f(char *F, int *cur_flag) {
-    struct stat buff;
-    if(cur_flag[9]){
-        stat(F, &buff);
-    } else {
-        lstat(F, &buff);
-    }
-    char *mode = mx_get_permissions(buff);
+void mx_printname_f(t_file *file, int *cur_flag) {
+    char *mode = file->permissions;
     if(cur_flag[2] && isatty(1)) { // -G
         check_col_att(mode);
     }
-    while(mx_strchr(F, '/') != NULL) {
-        F = mx_strchr(F, '/');
-        F++;
-    }
-    mx_printstr(F);
+    mx_printstr(file->filename);
+    if(cur_flag[19] && mode[0] == 'd')
+        mx_printstr("/");
     if(cur_flag[2] && isatty(1)) {
         mx_printstr("\033[0m");
     }
@@ -42,7 +34,7 @@ static void color_dir(char *mode) {
 static void color_x(char *mode) {
     if(mode[3] == 's'){
         mx_printstr("\033[0;30;41m");
-    } else if (mode[7] == 's'){
+    } else if (mode[6] == 's'){
         mx_printstr("\033[0;30;46m");
     } else {
        mx_printstr("\033[0;31m");

@@ -1,26 +1,25 @@
 #include "uls.h"
 
-static char mx_get_type(struct stat file_stat);
+static char get_type(struct stat file_stat);
+static char get_mode(int mode, int user_type);
+static char get_char(int mode, int is_exec, int is_id);
 
 char *mx_get_permissions(struct stat file_stat) {
     char *permissions = mx_strnew(11);
-    permissions[0] = mx_get_type(file_stat); 
+    permissions[0] = get_type(file_stat); 
     permissions[1] = (file_stat.st_mode & S_IRUSR) ? 'r' : '-';
     permissions[2] = (file_stat.st_mode & S_IWUSR) ? 'w' : '-';
-    permissions[3] = (file_stat.st_mode & S_IXUSR) ? 'x' : '-';
+    permissions[3] = get_mode(file_stat.st_mode, 1);
     permissions[4] = (file_stat.st_mode & S_IRGRP) ? 'r' : '-';
     permissions[5] = (file_stat.st_mode & S_IWGRP) ? 'w' : '-';
-    permissions[6] = (file_stat.st_mode & S_IXGRP) ? 'x' : '-';
+    permissions[6] = get_mode(file_stat.st_mode, 2);
     permissions[7] = (file_stat.st_mode & S_IROTH) ? 'r' : '-';
     permissions[8] = (file_stat.st_mode & S_IWOTH) ? 'w' : '-';
-    permissions[9] = (file_stat.st_mode & S_IXOTH) ? 'x' : '-';
-    if(file_stat.st_mode & S_ISTXT) {
-        permissions[9] = 't';
-    }
+    permissions[9] = get_mode(file_stat.st_mode, 4);
     return permissions;
 }
 
-static char mx_get_type(struct stat file_stat) {
+static char get_type(struct stat file_stat) {
     char result = '-';
     if ((file_stat.st_mode & S_IFMT) == S_IFCHR)
         return 'c';
@@ -35,4 +34,40 @@ static char mx_get_type(struct stat file_stat) {
     if ((file_stat.st_mode & S_IFMT) == S_IFDIR)
         return 'd';
     return result;
+}
+
+static char get_char(int mode, int is_exec, int is_id) {
+    if (mode & is_exec) {
+        if (mode & is_id)
+            return 's';
+        else
+            return 'x';
+    }
+    else {
+        if (mode & is_id)
+            return 'S';
+        else
+            return '-';
+    }
+}
+
+static char get_mode(int mode, int user_type) {
+    if (user_type == 1)
+        return get_char(mode, S_IXUSR, S_ISUID);
+    else if (user_type == 2)
+        return get_char(mode, S_IXGRP, S_ISGID);
+    else {
+        if (mode & S_IXOTH) {
+            if (mode & S_ISTXT)
+                return 't';
+            else
+                return 'x';
+        }
+        else {
+            if (mode & S_ISTXT)
+                return 'T';
+            else 
+                return '-';
+        }
+    }
 }

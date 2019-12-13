@@ -9,7 +9,7 @@ void mx_R(int *cur_flag, char **F, all_t all, char *Directory, int dir_count) {
         	struct stat buff;
         	lstat(path, &buff);
         	char *mode = mx_get_permissions(buff);
-            if(mode[0] == 'd' && F[i][0] != '.') {    
+            if(mode[0] == 'd' && (mx_strcmp(F[i], ".") != 0 && mx_strcmp(F[i], "..") != 0)) {    
                 char **rec_D = malloc(sizeof(char *) * 200);
                 mx_printstr("\n");
                 mx_printstr(path);

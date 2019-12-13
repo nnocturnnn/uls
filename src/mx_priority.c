@@ -1,95 +1,24 @@
 #include "uls.h"
 
-static int l_1_comb(char **argv, all_t all);
-static int l_C_comb(char **argv, all_t all);
-static int c_1_comb(char **argv, all_t all);
-static int all_comb(char **argv, all_t all);
+int *mx_priority(char *flags, char **argv, int n_flags) {
+    int *prio_flag = malloc(sizeof(int) * mx_strlen(flags));
+    int l = mx_strlen(flags);
+    char *p = {"logn1Cm\0"};
 
-int mx_priority(int *cur_flag, char **argv, all_t all) {
-	for(int i = 0; i < 18; i++) {
-        if(cur_flag[0] && cur_flag[16] && cur_flag[17]) {
-			return all_comb(argv, all);
-		}
-		else if(cur_flag[0] && cur_flag[16]) {
-			return l_1_comb(argv, all);
-		}
-		else if(cur_flag[0] && cur_flag[17]) {
-			return l_C_comb(argv, all);
-		}
-		else if(cur_flag[16] && cur_flag[17]) {
-			return c_1_comb(argv, all);
-		}
+    for (int q = 0; q < l; q++) {
+        prio_flag[q] = 0;
     }
-    return -2;
+    for(int i = 1; i <= n_flags; i++) {
+        for(int j = 1; j < mx_strlen(argv[i]); j++) {
+            for (int k = 0; k < l; k++) {
+                if(argv[i][j] == flags[k] 
+                   && mx_get_char_index(p, flags[k]) >= 0) {
+                    for(int c = 0; c < l; c++) {
+                        prio_flag[c] = 0;
+                    }
+                    prio_flag[k] = 1;
+                }
+            }
+        }
+    } return prio_flag;
 }
-
-static int l_1_comb(char **argv, all_t all) {
-	int l = 0;
-	int one = 0;
-
-	for(int k = 1; k < all.n_flags + 1; k++) {
-		l = k + mx_get_char_index_pr(argv[k], 'l');
-		one = k + mx_get_char_index_pr(argv[k], '1');
-	}
-	if(l > one) {
-		return 999999;	
-	} else {
-		return -1;
-	}
-}
-
-static int l_C_comb(char **argv, all_t all) {
-	int l = 0;
-	int c = 0;
-
-	for(int k = 1; k < all.n_flags + 1; k++) {
-		l = k + mx_get_char_index_pr(argv[k], 'l');
-		c = k + mx_get_char_index_pr(argv[k], 'C');
-	}
-	if(l > c) {
-		return 999999;	
-	} else {
-		return 0;
-	}
-}
-
-static int c_1_comb(char **argv, all_t all) {
-	int one = 0;
-	int c = 0;
-
-	for(int k = 1; k < all.n_flags + 1; k++) {
-		one = k + mx_get_char_index_pr(argv[k], '1');
-		c = k + mx_get_char_index_pr(argv[k], 'C');
-	}
-	if(one > c) {
-		return -1;	
-	} else {
-		return 0;
-	}
-}
-
-static int all_comb(char **argv, all_t all) {
-	int l = 0;
-	int c = 0; 
-	int one = 0;
-
-	for(int k = 1; k <= all.n_flags; k++) {
-		l = k + mx_get_char_index_pr(argv[k], 'l');
-		one = k + mx_get_char_index_pr(argv[k], '1');
-		c = k + mx_get_char_index_pr(argv[k], 'C');
-	}
-	if(l > one && l > c) {
-		return 999999;
-    }
-	else if(c > one && c > l) {
-		return 0;
-	} 
-    else {
-		return -1;
-	}
-    return -3;
-}
-
-
-
-

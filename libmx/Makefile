@@ -263,7 +263,7 @@ all: install uninstall
 install:
 	@cp $(INC) $(SRCS) .
 	@clang $(CFLGS) -c  $(SRC)
-	@mkdir  obj
+	@mkdir -p obj
 	@mv $(OBJ) ./obj
 	@ar -rc $(NAME) $(OBJO)
 

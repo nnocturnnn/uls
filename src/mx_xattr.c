@@ -40,7 +40,7 @@ static void print_xattr(char *key, int vallen, t_file **all, int *cur_flag) {
         mx_space(mx_get_max_size(all) - 2);
         mx_printstr(mx_itoa(vallen));
     } else { //-h
-        mx_space(mx_get_max_size_h(all) - 2);
+        mx_space(mx_get_max_size(all) - 2);
         mx_printstr(mx_get_sizeh(mx_itoa(vallen)));
     }
     mx_space(1);
