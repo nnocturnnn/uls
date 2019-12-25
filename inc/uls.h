@@ -39,13 +39,13 @@ typedef struct s_file {
     char acl_attr;
 } t_file;
 
-typedef struct all_s  {
+typedef struct s_all  {
     int n_flags;
     int n_errors;
     int n_files;
     int n_dirs;
     int *priority;
-} all_t;
+} t_all;
 
 
 typedef struct s_arr {
@@ -103,18 +103,18 @@ int mx_get_max_group(t_file **all);
 int mx_get_max_time(t_file **all);
 int mx_get_max_size_h(t_file **all);
 char *mx_get_full_time(time_t time);
-char *mx_get_sizeh(char *size);
+char *mx_get_size_h(char *size);
 void mx_is_allowed(/*int *cur_flag,*/ char *Directory);
 char **mx_read(int *cur_flag, DIR *dptr, int *dir_count);
-void mx_R(int *cur_flag, char **F, all_t all, char *Directory, int dir_count);
+void mx_R(int *cur_flag, char **F, t_all all, char *Directory, int dir_count);
 void mx_space(int count);
 char mx_get_acl(char *filename, char *path);
 void mx_get_total(char **F, char *Directory);
 void mx_e_usage(int argc, char *argv[], int *n_flags,  
                                 char *flags, int *cur_flag);
-void mx_print_abcents(all_t all, char **E);
-void mx_print_files(all_t all, char **F,  int *cur_flag);
-void mx_print_dirs(all_t all, char **D, int *cur_flag);
+void mx_print_abcents(t_all all, char **E);
+void mx_print_files(t_all all, char **F,  int *cur_flag);
+void mx_print_dirs(t_all all, char **D, int *cur_flag);
 void mx_print_dname(int n_dirs, int n_files, int n_errors, char *dname);
 char *mx_strchr(const char *s, int c);
 int mx_get_char_index(const char *str, char c);
@@ -129,8 +129,8 @@ size_t mx_atosize(const char *str);
 char *mx_get_short_time(time_t time,  time_t current_time);
 void mx_acl(int *cur_flag, t_file *all);
 int *mx_get_current_flags(char *flags);
-void mx_quicksorty(char **D, char **F, char **E, all_t all);
-void mx_backsort(char **arr, int left, int right);
+void mx_quicksorty(char **D, char **F, char **E, t_all all);
+void mx_backsorty(char **arr, int left, int right);
 void mx_print_mx_acl(char ***data, t_file *all, int i);
 char *mx_get_short_size(int long_size, char *short_size, 
                         int *count, char *sizes);
@@ -148,6 +148,6 @@ char *mx_get_size(struct stat buff,  int *cur_flag);
 int *mx_priority(char *flags, char **argv, int argc);
 int mx_get_char_index_pr(const char *str, char c);
 void mx_m_output(char **F, int *cur_flag, char *Directory);
-void sorty(t_arr arr, all_t all, int *cur_flag);
+void mx_sorty(t_arr arr, t_all all, int *cur_flag);
 
 #endif 

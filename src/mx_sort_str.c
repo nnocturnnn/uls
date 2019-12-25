@@ -2,6 +2,7 @@
 
 char *mx_sort_str(int len, char *str)  {
     char *str1 = mx_strnew(len);
+    
     str1 = mx_strcpy(str1, str);
     for(int i = 1; i < len ; i++) {
         for(int j = 0; j < len - i ; j++) {

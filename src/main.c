@@ -1,16 +1,16 @@
 #include "uls.h"
 
-static all_t *init(int argc, char *argv[], t_arr arr);
+static t_all *init(int argc, char *argv[], t_arr arr);
 static int r_n_flag(int argc, char **argv, int n_flags);
-static int *r_cur_flag(int argc, char **argv, all_t all);
+static int *r_cur_flag(int argc, char **argv, t_all all);
 static t_arr *initarr(int argc);
 
-int main(int argc, char *argv[]) {          
+int main(int argc, char *argv[]) {
     t_arr *arr = initarr(argc);
-    all_t *all = init(argc, argv, *arr);
+    t_all *all = init(argc, argv, *arr);
     int *cur_flag = r_cur_flag(argc, argv, *all);
     
-    sorty(*arr, *all, cur_flag);
+    mx_sorty(*arr, *all, cur_flag);
    	mx_print_abcents(*all, arr->E);//ошибки
    	mx_print_files(*all, arr->F, cur_flag);//файлы
    	mx_print_dirs(*all, arr->D, cur_flag);//директории
@@ -19,7 +19,6 @@ int main(int argc, char *argv[]) {
 }
 
 static int r_n_flag(int argc, char **argv, int n_flags) {
-                  //012345678901234567890
     char *flags = {"lRGAaTh@eLouingr1Cmp\0"};
     int *cur_flag = mx_get_current_flags(flags);
 
@@ -28,16 +27,10 @@ static int r_n_flag(int argc, char **argv, int n_flags) {
     return n_flags;
 }
 
-static int *r_cur_flag(int argc, char **argv, all_t all) {
-    char *flags = {"lRGAaTh@eLouingr1Cmp\0"};
-    int *cur_flag = mx_get_current_flags(flags);
 
-    all.n_flags = mx_count_flags(argc, argv, flags, cur_flag);
-    return cur_flag;
-}
 
-static all_t *init(int argc, char **argv, t_arr arr) {
-    all_t *data = malloc(sizeof(all_t));
+static t_all *init(int argc, char **argv, t_arr arr) {
+    t_all *data = malloc(sizeof(t_all));
     int n_flags = 1;
     char *flags = {"lRGAaTh@eLouingr1Cmp\0"};
     int *cur_flag = mx_get_current_flags(flags);
@@ -45,7 +38,7 @@ static all_t *init(int argc, char **argv, t_arr arr) {
     n_flags = mx_count_flags(argc, argv, flags, cur_flag);
     n_flags = r_n_flag(argc, argv, n_flags);
     data->n_flags = n_flags;
-    data->n_errors =  mx_fill_errors(argc, argv, n_flags, arr.E);
+    data->n_errors = mx_fill_errors(argc, argv, n_flags, arr.E);
     data->n_files = mx_fill_files(argc, argv, n_flags, arr.F);
     data->n_dirs = mx_fill_dirs(argc, argv, n_flags, arr.D);
     data->priority = mx_priority(flags, argv, n_flags);
@@ -62,4 +55,12 @@ static t_arr *initarr(int argc) {
     data->D = D;
     data->E = E;
     return data;
+}
+
+static int *r_cur_flag(int argc, char **argv, t_all all) {
+    char *flags = {"lRGAaTh@eLouingr1Cmp\0"};
+    int *cur_flag = mx_get_current_flags(flags);
+
+    all.n_flags = mx_count_flags(argc, argv, flags, cur_flag);
+    return cur_flag;
 }

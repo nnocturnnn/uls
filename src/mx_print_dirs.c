@@ -4,7 +4,7 @@ static void l_output(int dir_c, char **F, int *cur_flag, char *D);
 static void free_rub(DIR *dptr, char *D);
 static void outputs(int dir_c, char **F, int *cur_flag, char *D, int *prior);
 
-void mx_print_dirs(all_t all, char **D, int *cur_flag) {
+void mx_print_dirs(t_all all, char **D, int *cur_flag) {
     int i = 0;
     while(D[i] != NULL) {
         mx_print_dname(all.n_dirs, all.n_files, all.n_errors, D[i]);

@@ -2,19 +2,19 @@
 
 int mx_fill_files(int argc, char *argv[], int n_flags, char **F) {
     int n_files = 0;
-    for(int i = n_flags + 1; i < argc; i++) {
-        //DIR *dptr = opendir(argv[i]);
+
+    for (int i = n_flags + 1; i < argc; i++) {
         struct stat buff;
-        if(lstat(argv[i], &buff) != -1) {
+
+        if (lstat(argv[i], &buff) != -1) {
             char *mode = mx_get_permissions(buff);
-            if (mode[0] != 'd') { 
+
+            if (mode[0] != 'd') {
                 F[n_files] = argv[i];
-                n_files++;   
+                n_files++;
             }
-        } 
-        F[n_files] = NULL;         
+        }
+        F[n_files] = NULL;
     }
     return n_files;
 }
-
-

@@ -5,13 +5,10 @@ void mx_def_space(int *cur_flag, int j, int max, t_file **all) {
         mx_space(max - mx_strlen(all[j]->filename) 
         - mx_strlen(all[j]->inode) - 1);
     } 
-    else {// standart output
+    else// standart output
         mx_space(max - mx_strlen(all[j]->filename));
-    }
-    if (cur_flag[2]) {// -G
+    if (cur_flag[2])// -G
         mx_space(1);
-    } 
-    else { // standart output
-         mx_printstr("\t");
-    }
+    else // standart output
+        mx_printstr("\t");
 }

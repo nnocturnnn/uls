@@ -6,6 +6,7 @@ static char get_char(int mode, int is_exec, int is_id);
 
 char *mx_get_permissions(struct stat file_stat) {
     char *permissions = mx_strnew(11);
+
     permissions[0] = get_type(file_stat); 
     permissions[1] = (file_stat.st_mode & S_IRUSR) ? 'r' : '-';
     permissions[2] = (file_stat.st_mode & S_IWUSR) ? 'w' : '-';
@@ -21,6 +22,7 @@ char *mx_get_permissions(struct stat file_stat) {
 
 static char get_type(struct stat file_stat) {
     char result = '-';
+
     if ((file_stat.st_mode & S_IFMT) == S_IFCHR)
         return 'c';
     if ((file_stat.st_mode & S_IFMT) == S_IFBLK)

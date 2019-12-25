@@ -2,7 +2,7 @@
 
 static char *get_path(char *File, char *Directory);
 
-void mx_R(int *cur_flag, char **F, all_t all, char *Directory, int dir_count) {
+void mx_R(int *cur_flag, char **F, t_all all, char *Directory, int dir_count) {
     if(cur_flag[1] == 1) {//-R
         for (int i = 0; i < dir_count; i++) {
         	char *path = get_path(F[i], Directory);

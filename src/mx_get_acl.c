@@ -9,13 +9,12 @@ char mx_get_acl(char *filename, char *path) {
     lstat(path, &buff);
     acl = acl_get_file(filename, ACL_TYPE_EXTENDED);
     xattr = listxattr(filename, NULL, 0, XATTR_NOFOLLOW);
-    if (xattr > 0){
+    if (xattr > 0)
         att = '@';
-    } else if (acl != NULL  && ((buff.st_mode & S_IFMT) != S_IFLNK)) {
+    else if (acl != NULL && ((buff.st_mode & S_IFMT) != S_IFLNK)) 
         att = '+';
-    } else {
+    else
         att = ' ';
-    } 
     acl_free(acl);
     return att;
 }

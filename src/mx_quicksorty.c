@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_quicksorty(char **D, char **F, char **E, all_t all) {
+void mx_quicksorty(char **D, char **F, char **E, t_all all) {
     if(all.n_dirs) {
         mx_quicksort(D, 0, all.n_dirs - 1);
     }

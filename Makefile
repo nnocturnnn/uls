@@ -5,13 +5,13 @@ INC = ./inc/uls.h
 HEADTMP = ./uls.h
 
 SRC = ./main.c \
-		./sorty.c \
+		./mx_sorty.c \
 		./mx_m_output.c \
 		./mx_get_char_index_pr.c \
 		./mx_priority.c \
 		./mx_slong_out.c \
 		./mx_flong_out.c \
-		./mx_back_sorty.c \
+		./mx_backsorty.c \
 		./mx_print_inode.c \
 		./mx_print_permissions.c \
 		./mx_get_controls.c \
@@ -25,7 +25,7 @@ SRC = ./main.c \
 		./mx_atosize.c \
 		./mx_cat_output.c \
 		./mx_count_words.c \
-		./mx_countflags.c \
+		./mx_count_flags.c \
 		./mx_fill_dirs.c \
 		./mx_fill_errors.c \
 		./mx_fill_files.c \
@@ -65,13 +65,13 @@ SRC = ./main.c \
 		./mx_get_size.c \
 
 SRCS = ./src/main.c \
-		./src/sorty.c \
+		./src/mx_sorty.c \
 		./src/mx_m_output.c \
 		./src/mx_get_char_index_pr.c \
 		./src/mx_priority.c \
 		./src/mx_slong_out.c \
 		./src/mx_flong_out.c \
-		./src/mx_back_sorty.c \
+		./src/mx_backsorty.c \
 		./src/mx_print_inode.c \
 		./src/mx_print_permissions.c \
 		./src/mx_get_controls.c \
@@ -85,7 +85,7 @@ SRCS = ./src/main.c \
 		./src/mx_atosize.c \
 		./src/mx_cat_output.c \
 		./src/mx_count_words.c \
-		./src/mx_countflags.c \
+		./src/mx_count_flags.c \
 		./src/mx_fill_dirs.c \
 		./src/mx_fill_errors.c \
 		./src/mx_fill_files.c \
@@ -125,13 +125,13 @@ SRCS = ./src/main.c \
 		./src/mx_get_size.c \
 
 OBJ = ./main.o \
-		./sorty.o \
+		./mx_sorty.o \
 		./mx_m_output.o \
 		./mx_get_char_index_pr.o \
 		./mx_priority.o \
 		./mx_slong_out.o \
 		./mx_flong_out.o \
-		./mx_back_sorty.o \
+		./mx_backsorty.o \
 		./mx_print_inode.o \
 		./mx_print_permissions.o \
 		./mx_get_controls.o\
@@ -145,7 +145,7 @@ OBJ = ./main.o \
 		./mx_atosize.o \
 		./mx_cat_output.o \
 		./mx_count_words.o \
-		./mx_countflags.o \
+		./mx_count_flags.o \
 		./mx_fill_dirs.o \
 		./mx_fill_errors.o \
 		./mx_fill_files.o \
@@ -185,13 +185,13 @@ OBJ = ./main.o \
 		./mx_get_size.o \
 
 OBJO = ./obj/main.o \
-		./obj/sorty.o \
+		./obj/mx_sorty.o \
 		./obj/mx_m_output.o \
 		./obj/mx_get_char_index_pr.o \
 		./obj/mx_priority.o \
 		./obj/mx_slong_out.o \
 		./obj/mx_flong_out.o \
-		./obj/mx_back_sorty.o \
+		./obj/mx_backsorty.o \
 		./obj/mx_print_inode.o \
 		./obj/mx_print_permissions.o \
 		./obj/mx_get_controls.o\
@@ -205,7 +205,7 @@ OBJO = ./obj/main.o \
 		./obj/mx_atosize.o \
 		./obj/mx_cat_output.o \
 		./obj/mx_count_words.o \
-		./obj/mx_countflags.o \
+		./obj/mx_count_flags.o \
 		./obj/mx_fill_dirs.o \
 		./obj/mx_fill_errors.o \
 		./obj/mx_fill_files.o \

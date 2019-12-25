@@ -1,19 +1,9 @@
 #include "uls.h"
 
-static int mx_numlen(size_t num);
-
-static int mx_numlen(size_t num) {
-    int len = 0;
-
-    while (num > 0) {
-        num /= 10;
-        len++;
-    }
-    return len == 0 ? 1 : len;
-}
+static int numlen(size_t num);
 
 char *mx_sizetoa(size_t number) {
-    int len = mx_numlen(number);
+    int len = numlen(number);
     char *result = mx_strnew(len);
     int min = 0;
 
@@ -22,4 +12,14 @@ char *mx_sizetoa(size_t number) {
         number /= 10;
     }
     return result;
+}
+
+static int numlen(size_t num) {
+    int len = 0;
+
+    while (num > 0) {
+        num /= 10;
+        len++;
+    }
+    return len == 0 ? 1 : len;
 }
