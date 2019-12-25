@@ -13,13 +13,13 @@ void mx_multicolumn_output(char **F, int n_files, int *cur_flag, char *Directory
     int count = count_lines(n_files, max, cur_flag);
     char *path;
 
-    for(int i = 0; i < count; i++) {
-        for(int j = 0; j < n_files; j++) {
+    for (int i = 0; i < count; i++) {
+        for (int j = 0; j < n_files; j++) {
             if (j == i || (j - i) % count == 0) {
                 path = get_path(F[j], Directory);
                 mx_print_inode(all[j], all, cur_flag); // inode
                 mx_printname_f(all[j], cur_flag);
-                if(j + count >= n_files) {
+                if (j + count >= n_files) {
                     mx_printstr("\n");
                 } else {
                     mx_def_space(cur_flag, j, max, all);

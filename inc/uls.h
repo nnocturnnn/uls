@@ -84,54 +84,40 @@ int mx_fill_files(int argc, char *argv[], int n_flags, char **F);
 int mx_fill_dirs(int argc, char *argv[], int n_flags, char **D);
 char *mx_get_permissions(struct stat file_stat);
 char *mx_strncpy(char *dst, const char *src, int len);
-char **mx_sort_arr(int len, char **arr);
 void mx_cat_output(char **F, int *cur_flag, char *Directory);
 void mx_multicolumn_output(char **F,int n_files, int *cur_flag,
                                                      char *Directory);
 void mx_long_output(char **F, int *cur_flag, char *Directory);
-char *mx_get_sort_time(struct stat buff, char *full_time, 
-                                                time_t current_time);
 char *mx_get_group(struct stat buff, int *cur_flag);
 char *mx_get_owner(struct stat buff, int *cur_flag);
 t_file **mx_get_fileinfo(t_file **all, char **F, 
                             char *Directory, int *cur_flag);
 int mx_get_max_size(t_file **all);
 int mx_get_max_links(t_file **all);
-int mx_get_max_size_h(t_file **all);
 int mx_get_max_owner(t_file **all);
 int mx_get_max_group(t_file **all);
 int mx_get_max_time(t_file **all);
-int mx_get_max_size_h(t_file **all);
 char *mx_get_full_time(time_t time);
 char *mx_get_size_h(char *size);
-void mx_is_allowed(/*int *cur_flag,*/ char *Directory);
+void mx_is_allowed(char *Directory);
 char **mx_read(int *cur_flag, DIR *dptr, int *dir_count);
 void mx_R(int *cur_flag, char **F, t_all all, char *Directory, int dir_count);
 void mx_space(int count);
 char mx_get_acl(char *filename, char *path);
 void mx_get_total(char **F, char *Directory);
-void mx_e_usage(int argc, char *argv[], int *n_flags,  
-                                char *flags, int *cur_flag);
 void mx_print_abcents(t_all all, char **E);
 void mx_print_files(t_all all, char **F,  int *cur_flag);
 void mx_print_dirs(t_all all, char **D, int *cur_flag);
 void mx_print_dname(int n_dirs, int n_files, int n_errors, char *dname);
 char *mx_strchr(const char *s, int c);
-int mx_get_char_index(const char *str, char c);
 void mx_printname_f(t_file *file, int *cur_flag);
-void mx_link(int *cur_flag, char *name1, t_file *all);
 void mx_xattr(int *cur_flag, t_file *all, t_file **all_f);
-char **mx_strsplit(const char *s, char c);
-int mx_count_words(const char *str, char c);
 char *mx_sort_str(int len, char *str);
 char *mx_sizetoa(size_t number);
-size_t mx_atosize(const char *str);
 char *mx_get_short_time(time_t time,  time_t current_time);
 void mx_acl(int *cur_flag, t_file *all);
 int *mx_get_current_flags(char *flags);
-void mx_quicksorty(char **D, char **F, char **E, t_all all);
 void mx_backsorty(char **arr, int left, int right);
-void mx_print_mx_acl(char ***data, t_file *all, int i);
 char *mx_get_short_size(int long_size, char *short_size, 
                         int *count, char *sizes);
 void mx_def_space(int *cur_flag, int j, int max, t_file **all);
@@ -146,7 +132,6 @@ void mx_slong_out(t_file **all, int i, int *cur_flag);
 void mx_checksort(char **F, int *cur_flag, int dir_count);
 char *mx_get_size(struct stat buff,  int *cur_flag);
 int *mx_priority(char *flags, char **argv, int argc);
-int mx_get_char_index_pr(const char *str, char c);
 void mx_m_output(char **F, int *cur_flag, char *Directory);
 void mx_sorty(t_arr arr, t_all all, int *cur_flag);
 
