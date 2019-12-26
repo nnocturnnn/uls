@@ -1,7 +1,7 @@
 #include "uls.h"
 
 char **mx_read(int *cur_flag, DIR *dptr, int *dir_count) {
-    struct dirent  *ds;// = (struct dirent  *)malloc(sizeof(struct dirent) * 2000);
+    struct dirent  *ds;
     char **F = (char **)malloc(sizeof(char *) * 200000);
     int j = 0;
     while((ds = readdir(dptr)) != 0) {//cчитываем хуйню из директории

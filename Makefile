@@ -4,6 +4,7 @@ INC = ./inc/uls.h
 
 HEADTMP = ./uls.h
 
+ 
 SRC = ./main.c \
 	./mx_get_current_flags.c \
 	./mx_count_flags.c \

@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_prit_controls(char **new_controls) {
+void mx_print_controls(char **new_controls) {
     int j = 0;
     while(new_controls[j] != NULL) {
         mx_printstr(new_controls[j]);

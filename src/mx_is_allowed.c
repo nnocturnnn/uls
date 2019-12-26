@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_is_allowed(/*int *current_flags, */char *Directory) {
+void mx_is_allowed(char *Directory) {
     while (mx_strchr(Directory, '/') != 0) {
         Directory = mx_strchr(Directory, '/');
         Directory++;

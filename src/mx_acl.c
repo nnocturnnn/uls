@@ -42,8 +42,8 @@ static char ***get_data(int count, acl_t acl) {
 static void print_all(char ***data, char **permissions, 
                                 char **new_controls, int i) {
     mx_print_user(data, permissions, i);
-    mx_prit_controls(new_controls);
-    mx_prit_permisssions(permissions);
+    mx_print_controls(new_controls);
+    mx_print_permissions(permissions);
     mx_printstr("\n");
 }
 

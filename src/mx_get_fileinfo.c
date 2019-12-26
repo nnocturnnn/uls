@@ -23,7 +23,7 @@ static void set_data(t_file *file, char *F, char *Directory, int *cur_flag) {
     char *path = get_path(F, Directory);
     struct stat buff = get_stat(path, cur_flag);
     time_t time = get_time(buff, cur_flag); 
-
+    
     file->path = path;
     file->filename = F;
     file->permissions = mx_get_permissions(buff);

@@ -20,6 +20,11 @@ int main(int argc, char *argv[]) {
 
 static int r_n_flag(int argc, char **argv, int n_flags) {
     char *flags = {"lRGAaTh@eLouingr1Cmp\0"};
+    //lRGAahouigr1Cp
+    //o like l but without 4242
+    //u time last access to file
+    //C like without flags
+    // with / if dir
     int *cur_flag = mx_get_current_flags(flags);
 
     n_flags = mx_count_flags(argc, argv, flags, cur_flag);
