@@ -1,8 +1,8 @@
 # uls
 
 ### Installation:
->**1. git clone  https://github.com/nnocturnnn/uls.git
->**2. cd uls
+>**1. git clone  https://github.com/nnocturnnn/uls.git </br>
+>**2. cd uls </br>
 >**3. make
 ```
 ./uls -z |cat-e
