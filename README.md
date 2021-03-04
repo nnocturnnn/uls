@@ -41,4 +41,3 @@ drwxr-xr-x  2 neo  staff   64 May 17 14:57 dir3$
 |   C  |  Force multi-column output                                 |
 |   m  | Stream output format; list files across the page           |
 |   p  | Force output to be one entry per line                      |
-|:----:|:----------------------------------------------------------:|
